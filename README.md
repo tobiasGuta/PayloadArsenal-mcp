@@ -65,6 +65,54 @@ Wordlist ranking is advisory and does not claim that a list is optimal or comple
 
 The empty object calls `arsenal_collections`; the same input calls `arsenal_status` when that tool name is selected.
 
+## Prompt examples for testing
+
+Copy one prompt at a time into an MCP client after connecting the server. Each section has a placeholder where a screenshot of the result can be added.
+
+### Server status and collections
+
+```text
+Use arsenal_status and arsenal_collections. Show the server version, safe configuration limits, index availability, and all available collections with revisions and supported-text-file counts. Do not expose absolute host paths.
+```
+
+**Screenshot:** _Add the result screenshot here._
+
+
+### Categories and filename search
+
+```text
+Discover up to 20 categories from PayloadsAllTheThings at depth 2 using arsenal_categories. Then use arsenal_search_files to find up to 10 Markdown files whose names or paths contain xss. Show collection, relative path, size, extension, and provenance.
+```
+
+**Screenshot:** _Add the result screenshot here._
+
+
+### Bounded file reading
+
+```text
+Use arsenal_search_files to find a Markdown README related to SQL injection in PayloadsAllTheThings. Select the best result, construct its arsenal-relative path using the collection name, and use arsenal_read_file to return only lines 1 through 40 with line numbers. Do not request or display the whole file.
+```
+
+**Screenshot:** _Add the result screenshot here._
+
+
+### Content search and payload references
+
+```text
+Search PayloadsAllTheThings for the text UNION SELECT using arsenal_search_content, with two context lines and a maximum of five results. Then use arsenal_find_payload_references for vulnerability class sql injection and context union based, limited to five results. Return only source-derived material with paths, line ranges, explanations, relevance scores, and revisions. Do not generate or execute payloads.
+```
+
+**Screenshot:** _Add the result screenshot here._
+
+
+### Wordlist discovery
+
+```text
+Use arsenal_find_wordlists to find up to five wordlists in SecLists for the purpose API endpoint discovery and technology graphql, with each file no larger than 500,000 bytes. Return metadata only: relative path, size, approximate line count, suggested use, relevance score, and provenance. Do not return full wordlist contents or claim that any result is optimal.
+```
+
+**Screenshot:** _Add the result screenshot here._
+
 ## Configuration
 
 Invalid, malformed, or out-of-range values fall back to the documented safe default. Only validated numbers, booleans, the arsenal root basename, and collection names can appear in status output; index and host paths are not exposed.
