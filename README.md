@@ -115,10 +115,13 @@ codex mcp list
 PowerShell example:
 
 ```powershell
-codex mcp add payload-arsenal `
-  --env ARSENAL_DIR="C:\path\to\arsenal" `
-  -- "C:\path\to\PayloadArsenal-mcp\.venv\Scripts\python.exe" `
-     "C:\path\to\PayloadArsenal-mcp\server.py"
+codex mcp add payload-arsenal -- `
+  docker run --rm -i `
+  --read-only `
+  --cap-drop=ALL `
+  --security-opt=no-new-privileges `
+  --tmpfs /tmp:rw,noexec,nosuid,size=128m `
+  payload-arsenal-mcp:1.0.0
 
 codex mcp list
 ```
