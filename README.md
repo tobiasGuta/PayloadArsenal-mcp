@@ -75,8 +75,7 @@ Copy one prompt at a time into an MCP client after connecting the server. Each s
 Use arsenal_status and arsenal_collections. Show the server version, safe configuration limits, index availability, and all available collections with revisions and supported-text-file counts. Do not expose absolute host paths.
 ```
 
-**Screenshot:** _Add the result screenshot here._
-
+**Screenshot:** <img width="1893" height="687" alt="image" src="https://github.com/user-attachments/assets/f4af8b7a-71d5-4331-9e38-1d8ae94341f1" />
 
 ### Categories and filename search
 
@@ -84,8 +83,7 @@ Use arsenal_status and arsenal_collections. Show the server version, safe config
 Discover up to 20 categories from PayloadsAllTheThings at depth 2 using arsenal_categories. Then use arsenal_search_files to find up to 10 Markdown files whose names or paths contain xss. Show collection, relative path, size, extension, and provenance.
 ```
 
-**Screenshot:** _Add the result screenshot here._
-
+**Screenshot:** <img width="1904" height="913" alt="image" src="https://github.com/user-attachments/assets/68e95c55-6ab3-4c2f-89a0-705fed059053" />
 
 ### Bounded file reading
 
@@ -93,8 +91,7 @@ Discover up to 20 categories from PayloadsAllTheThings at depth 2 using arsenal_
 Use arsenal_search_files to find a Markdown README related to SQL injection in PayloadsAllTheThings. Select the best result, construct its arsenal-relative path using the collection name, and use arsenal_read_file to return only lines 1 through 40 with line numbers. Do not request or display the whole file.
 ```
 
-**Screenshot:** _Add the result screenshot here._
-
+**Screenshot:** <img width="1906" height="896" alt="image" src="https://github.com/user-attachments/assets/ecda0cdb-e3df-44aa-9217-8f6af32305f8" />
 
 ### Content search and payload references
 
@@ -102,8 +99,7 @@ Use arsenal_search_files to find a Markdown README related to SQL injection in P
 Search PayloadsAllTheThings for the text UNION SELECT using arsenal_search_content, with two context lines and a maximum of five results. Then use arsenal_find_payload_references for vulnerability class sql injection and context union based, limited to five results. Return only source-derived material with paths, line ranges, explanations, relevance scores, and revisions. Do not generate or execute payloads.
 ```
 
-**Screenshot:** _Add the result screenshot here._
-
+**Screenshot:** <img width="1913" height="466" alt="image" src="https://github.com/user-attachments/assets/5035e20d-dd9c-4bee-8267-af4fa98ca131" />
 
 ### Wordlist discovery
 
@@ -111,7 +107,7 @@ Search PayloadsAllTheThings for the text UNION SELECT using arsenal_search_conte
 Use arsenal_find_wordlists to find up to five wordlists in SecLists for the purpose API endpoint discovery and technology graphql, with each file no larger than 500,000 bytes. Return metadata only: relative path, size, approximate line count, suggested use, relevance score, and provenance. Do not return full wordlist contents or claim that any result is optimal.
 ```
 
-**Screenshot:** _Add the result screenshot here._
+**Screenshot:** <img width="1919" height="335" alt="image" src="https://github.com/user-attachments/assets/50684289-b24d-48f0-863b-48a1ecc35841" />
 
 ## Configuration
 
