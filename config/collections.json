@@ -1,0 +1,12 @@
+{
+  "collections": {
+    "PayloadsAllTheThings": {
+      "repository": "https://github.com/swisskyrepo/PayloadsAllTheThings.git",
+      "revision": "5443cbde384134094f25b1b440695757a2803d55"
+    },
+    "SecLists": {
+      "repository": "https://github.com/danielmiessler/SecLists.git",
+      "revision": "9c07a0363337639b7556db8cf57a38bd5703e4f2"
+    }
+  }
+}
