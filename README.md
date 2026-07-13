@@ -95,6 +95,84 @@ ARSENAL_DIR=/absolute/path/to/arsenal python server.py
 
 The server uses stdio transport. Do not write debugging output to stdout; diagnostics are logged to stderr.
 
+## Connect from MCP clients
+
+Use absolute paths and keep `ARSENAL_DIR` pointed at a local, read-only collection directory. The native Python examples assume dependencies were installed into this repository's `.venv`; substitute your actual paths. On Windows, quote paths that contain spaces and use `.venv\Scripts\python.exe`.
+
+### Codex CLI
+
+Add the native server to the active Codex CLI profile:
+
+```bash
+codex mcp add payload-arsenal \
+  --env ARSENAL_DIR=/absolute/path/to/arsenal \
+  -- /absolute/path/to/PayloadArsenal-mcp/.venv/bin/python \
+     /absolute/path/to/PayloadArsenal-mcp/server.py
+
+codex mcp list
+```
+
+PowerShell example:
+
+```powershell
+codex mcp add payload-arsenal `
+  --env ARSENAL_DIR="C:\path\to\arsenal" `
+  -- "C:\path\to\PayloadArsenal-mcp\.venv\Scripts\python.exe" `
+     "C:\path\to\PayloadArsenal-mcp\server.py"
+
+codex mcp list
+```
+
+To use the hardened container instead, replace the command after `--` with the Docker invocation below. It preserves the read-only filesystem, dropped capabilities, no-new-privileges setting, and read-only arsenal mount:
+
+```bash
+codex mcp add payload-arsenal -- \
+  docker run --rm -i \
+    --read-only \
+    --cap-drop=ALL \
+    --security-opt=no-new-privileges \
+    --tmpfs /tmp:rw,noexec,nosuid,size=128m \
+    -v /absolute/path/to/arsenal:/opt/arsenal:ro \
+    payload-arsenal-mcp:1.0.0
+```
+
+Remove it later with `codex mcp remove payload-arsenal`.
+
+### Claude Code
+
+Claude Code also supports local stdio MCP servers. The following creates a user-scoped entry; use `--scope project` only when the team intentionally wants to share an `.mcp.json` configuration.
+
+```bash
+claude mcp add payload-arsenal --scope user \
+  --env ARSENAL_DIR=/absolute/path/to/arsenal \
+  -- /absolute/path/to/PayloadArsenal-mcp/.venv/bin/python \
+     /absolute/path/to/PayloadArsenal-mcp/server.py
+
+claude mcp list
+```
+
+See the [Claude Code MCP documentation](https://docs.anthropic.com/en/docs/claude-code/mcp) for client installation, scopes, and platform-specific behavior.
+
+### Other compatible stdio clients
+
+Many MCP clients accept an equivalent JSON object. Add it to that client's documented MCP configuration file, adjusting the executable and paths for the platform:
+
+```json
+{
+  "mcpServers": {
+    "payload-arsenal": {
+      "command": "/absolute/path/to/PayloadArsenal-mcp/.venv/bin/python",
+      "args": ["/absolute/path/to/PayloadArsenal-mcp/server.py"],
+      "env": {
+        "ARSENAL_DIR": "/absolute/path/to/arsenal"
+      }
+    }
+  }
+}
+```
+
+Do not configure this server as an HTTP endpoint: it intentionally uses stdio and does not expose a network port. Restart or reload the client after changing its MCP configuration.
+
 ## Docker
 
 The Dockerfile pins Python 3.13.14 by OCI digest, installs the hash-locked dependency graph, bundles collection snapshots at the commits recorded in `config/collections.json`, removes build-time Git metadata, runs as UID/GID 10001, exposes no port, and uses an exec-form stdio entrypoint.
